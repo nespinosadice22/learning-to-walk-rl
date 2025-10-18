@@ -1,0 +1,18 @@
+Best for starting position: standing and boxes: False
+Final reward: 420.38437861800196
+Params:
+  trial_from_search: standing_no_boxes_50_trial_33
+  learning_rate: 3.3965316256683674e-05
+  n_steps: 2560
+  batch_size: 32
+  n_epochs: 10
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.0
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  use_sde: False
+  weight_decay: 0.0
+  architecture_scale: 2
+  seed: 89

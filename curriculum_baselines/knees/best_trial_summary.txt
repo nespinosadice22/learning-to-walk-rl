@@ -1,0 +1,18 @@
+Best for starting position: knees and boxes: False
+Final reward: 232.3376167446375
+Params:
+  trial_from_search: knees_50_trial_42
+  learning_rate: 4.587581884195096e-05
+  n_steps: 1536
+  batch_size: 32
+  n_epochs: 10
+  gamma: 0.95
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.005
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  use_sde: False
+  weight_decay: 1.129342343973893e-05
+  architecture_scale: 2
+  seed: 451

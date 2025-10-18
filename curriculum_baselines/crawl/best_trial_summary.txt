@@ -1,0 +1,18 @@
+Best for starting position: crawl_perpendicular and boxes: False
+Final reward: 1211.8390505433083
+Params:
+  trial_from_search: crawl_perp_50_500k_max_trial_8
+  learning_rate: 0.00031469776078949706
+  n_steps: 1536
+  batch_size: 32
+  n_epochs: 1
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.0
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  use_sde: False
+  weight_decay: 0.0
+  architecture_scale: 1
+  seed: 180

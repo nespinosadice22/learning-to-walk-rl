@@ -1,0 +1,19 @@
+Best for starting position: supine and boxes: False
+Final reward: 365.608199392166
+Params:
+  trial_from_search: supine_300kmax_50_trial_14
+  learning_rate: 2.2942871847752808e-05
+  n_steps: 2048
+  batch_size: 64
+  n_epochs: 10
+  gamma: 0.95
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.005
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  use_sde: False
+  weight_decay: 0.0016789678346559422
+  architecture_scale: 4
+  seed: 133
+Elapsed time: 6904.989470005035
