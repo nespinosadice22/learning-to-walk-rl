@@ -1,0 +1,22 @@
+Summary of average metrics across seeds (per config)
+====================================================
+8to128_layers3_lrdc_0.9   -> COM=0.3432, Energy=13.2318, Reward=1408.02
+8to128_layers3_lrdc_0.5   -> COM=0.3636, Energy=9.6799, Reward=1261.45
+8to128_layers3_lrdc_0.1   -> COM=0.4063, Energy=9.8449, Reward=1231.73
+8to128_layers3_lrdc_0.3   -> COM=0.4063, Energy=9.8449, Reward=1231.73
+8to128_layers3_lrdc_0.7   -> COM=0.4063, Energy=9.8449, Reward=1231.73
+4to64_layers4_lrdc_0.1    -> COM=0.3973, Energy=9.5233, Reward=956.19
+4to64_layers4_lrdc_0.3    -> COM=0.4666, Energy=7.6495, Reward=750.09
+4to64_layers4_lrdc_0.7    -> COM=0.4666, Energy=7.6495, Reward=750.09
+4to64_layers4_lrdc_0.9    -> COM=0.4666, Energy=7.6495, Reward=750.09
+4to64_layers4_lrdc_0.5    -> COM=0.5134, Energy=5.4280, Reward=718.75
+4to64_layers3_lrdc_0.1    -> COM=0.4725, Energy=9.8398, Reward=581.78
+4to64_layers3_lrdc_0.3    -> COM=0.4725, Energy=9.8398, Reward=581.78
+4to64_layers3_lrdc_0.5    -> COM=0.4725, Energy=9.8398, Reward=581.78
+4to64_layers3_lrdc_0.7    -> COM=0.4725, Energy=9.8398, Reward=581.78
+4to64_layers3_lrdc_0.9    -> COM=0.4725, Energy=9.8398, Reward=581.78
+8to128_layers4_lrdc_0.1   -> COM=0.0000, Energy=0.0000, Reward=0.00
+8to128_layers4_lrdc_0.3   -> COM=0.0000, Energy=0.0000, Reward=0.00
+8to128_layers4_lrdc_0.5   -> COM=0.0000, Energy=0.0000, Reward=0.00
+8to128_layers4_lrdc_0.7   -> COM=0.0000, Energy=0.0000, Reward=0.00
+8to128_layers4_lrdc_0.9   -> COM=0.0000, Energy=0.0000, Reward=0.00

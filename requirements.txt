@@ -1,0 +1,5 @@
+gymnasium==1.0.0
+matplotlib==3.7.1
+numpy==2.2.3
+stable_baselines3==2.5.0
+typer==0.15.1

@@ -1,0 +1,12 @@
+Summary of average metrics across seeds (per config)
+====================================================
+arch32_2-4layers_lrdec_0.5 -> COM=0.4229, Energy=6.2863, Reward=814.85
+arch32_2-4layers_lrdec_0.7 -> COM=0.5310, Energy=6.9862, Reward=497.83
+arch64_2-4layers_lrdec_0.7 -> COM=0.5057, Energy=6.2855, Reward=410.33
+arch32_2-4layers_lrdec_0.9 -> COM=0.4532, Energy=5.6848, Reward=401.88
+arch64_2-4layers_lrdec_0.5 -> COM=0.4390, Energy=9.4413, Reward=345.37
+arch64_2-4layers_lrdec_0.9 -> COM=0.5456, Energy=11.9848, Reward=336.23
+arch64_2-4layers_lrdec_0.3 -> COM=0.4252, Energy=8.7262, Reward=319.06
+arch32_2-4layers_lrdec_0.3 -> COM=0.4445, Energy=4.0351, Reward=305.13
+arch32_2-4layers_lrdec_0.1 -> COM=0.4609, Energy=8.4186, Reward=288.94
+arch64_2-4layers_lrdec_0.1 -> COM=0.3960, Energy=11.4848, Reward=241.31

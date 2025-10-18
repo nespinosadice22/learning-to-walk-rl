@@ -1,0 +1,204 @@
+<mujoco model="simple">
+  <option timestep="0.00833"/>
+
+  <include file="./common/skybox.xml"/>
+  <include file="./common/visual.xml"/>
+  <include file="./common/materials.xml"/>
+
+  <statistic extent="2" center="0 0 1"/>
+
+  <default class="main">
+    <joint limited="true" solimplimit="0 0.99 0.01" stiffness="0.1" armature=".01" damping="1"/>
+    <geom friction="0.7" solref="0.015 1" solimp="0.95 0.99 0.003"/>
+    <motor ctrllimited="true" ctrlrange="-1 1"/>
+    <default class="humanoid">
+      <geom type="capsule" material="humanoid_color"/>
+      <default class="stiff_low">
+        <joint stiffness=".5" damping="4"/>
+      </default>
+      <default class="stiff_medium">
+        <joint stiffness="10" damping="5"/>
+      </default>
+      <default class="stiff_high">
+        <joint stiffness="30" damping="10"/>
+      </default>
+      <default class="touch">
+        <site group="3" rgba="0 0 1 .5"/>
+      </default>
+    </default>
+    <!-- Default for black gloves -->
+    <default class="black_glove">
+      <geom rgba="0.05 0.05 0.05 1"/> 
+    </default>
+  </default>
+
+  <worldbody>
+    <geom name="floor" type="plane" conaffinity="1" size="100 100 .2" material="grid"/>
+    <light name="tracking_light" pos="0 0 7" dir="0 0 -1" mode="trackcom"/>
+    <camera name="back" pos="0 3 2.4" xyaxes="-1 0 0 0 -1 2" mode="trackcom"/>
+    <camera name="side" pos="-3 0 2.4" xyaxes="0 -1 0 1 0 2" mode="trackcom"/>
+    <body name="root" childclass="humanoid" pos="0 0 1" euler="90 0 0">
+      <site name="root" size=".01" rgba="0.5 0.5 0.5 0"/>
+      <freejoint name="root"/>
+      <geom name="pelvis" type="sphere" size="0.09" pos="0 -0.05 0"/>
+      <body name="lhipjoint">
+        <body name="lfemur" pos="0.102 -0.095 0.04" quat="1 0 0 0.17365">
+          <joint name="lfemurrx" axis="1 0 0" range="-160 20" class="stiff_medium"/>
+          <joint name="lfemurry" axis="0 1 0" range="-70 70" class="stiff_medium"/>
+          <joint name="lfemurrz" axis="0 0 1" range="-70 70" class="stiff_medium"/>
+          <geom name="lfemur" size="0.05 0.17" pos="-.01 -0.202473 0" quat="0.7 -0.7 -0.1228 -0.07"/>
+          <body name="ltibia" pos="0 -0.404945 0">
+            <joint name="ltibiarx" axis="1 0 0" range="1   170" class="stiff_low"/>
+            <geom name="ltibia" size="0.04 0.16" pos="0 -0.202846 0" quat="0.7 -0.7 -0.1228 -0.1228"/>
+            <body name="lfoot" pos="0 -0.405693 0" quat="0.707107 -0.707107 0 0">
+              <joint name="lfootrx" axis="1 0 0" range="-45    90" class="stiff_medium"/>
+              <joint name="lfootrz" axis="0 0 1" range="-70 20" class="stiff_medium"/>
+              <geom name="lfoot" type="box" size="0.04 0.10 0.02" pos="-.005 -.05 -0.025" euler="10 0 0" />
+              <site name="lfoot_touch" type="box" pos="-.005 -.05 -0.025" size=".04 .1 .02" euler="10 0 0" class="touch"/>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="rhipjoint">
+        <body name="rfemur" pos="-0.102 -0.095 0.04" quat="1 0 0 -0.17365">
+          <joint name="rfemurrx" axis="1 0 0" range="-160 20" class="stiff_medium"/>
+          <joint name="rfemurry" axis="0 1 0" range="-70 70" class="stiff_medium"/>
+          <joint name="rfemurrz" axis="0 0 1" range="-70 70" class="stiff_medium"/>
+          <geom name="rfemur" size="0.05 0.17" pos=".01 -0.202473 0" quat="0.7 -0.7 0.1228 0.07"/>
+          <body name="rtibia" pos="0 -0.404945 0">
+            <joint name="rtibiarx" axis="1 0 0" range="1   170" class="stiff_low"/>
+            <geom name="rtibia" size="0.04 0.16" pos="0 -0.202846 0" quat="0.7 -0.7 0.1228 0.1228"/>
+            <body name="rfoot" pos="0 -0.405693 0" quat="0.707107 -0.707107 0 0">
+              <site name="rfoot_touch" type="box" pos=".005 -.05 -0.025" size=".04 .10 .02" euler="10 0 0" class="touch"/>
+              <joint name="rfootrx" axis="1 0 0" range="-45    90" class="stiff_medium"/>
+              <joint name="rfootrz" axis="0 0 1" range="-20 70" class="stiff_medium"/>
+              <geom name="rfoot" type="box" pos=".005 -.05 -0.025" size=".04 .10 .02" euler="10 0 0"/>
+            </body>
+          </body>
+        </body>
+      </body>
+      <body name="lowerback">
+        <joint name="lowerbackrx" axis="1 0 0" range="-20 45" class="stiff_high"/>
+        <joint name="lowerbackry" axis="0 1 0" range="-30 30" class="stiff_high"/>
+        <joint name="lowerbackrz" axis="0 0 1" range="-30 30" class="stiff_high"/>
+        <geom name="lowerback" type="sphere" size="0.05" pos="0 0.06 .02"/>
+        <body name="upperback" pos="0 0.11 -0.01">
+          <joint name="upperbackrx" axis="1 0 0" range="-20 45" class="stiff_high"/>
+          <joint name="upperbackry" axis="0 1 0" range="-30 30" class="stiff_high"/>
+          <joint name="upperbackrz" axis="0 0 1" range="-30 30" class="stiff_high"/>
+          <geom name="upperback" type="sphere" size="0.075" pos="0 0.06 0.02"/>
+          <body name="thorax" pos="0.000512528 0.11356 0.000936821">
+            <joint name="thoraxrx" axis="1 0 0" range="-20 45" class="stiff_high"/>
+            <joint name="thoraxry" axis="0 1 0" range="-30 30" class="stiff_high"/>
+            <joint name="thoraxrz" axis="0 0 1" range="-30 30" class="stiff_high"/>
+            <!-- <geom name="thorax" size="0.065 0.07" pos="0 0.05 0" quat="1 0 1 0"/> -->
+            <geom name="thorax_sphere1" type="sphere" size="0.09" pos="0 0.09 0"/>
+            <!-- <geom name="thorax_sphere2" type="sphere" size="0.09" pos="-0.05 0.09 0"/> -->
+            <!-- <geom name="neck" size="0.045 0.02" pos="0 0.20 0" quat="1 1 0 0"/> -->
+            <body name="head" pos="0 0.08 0.0">
+                  <camera name="egocentric" pos="0 0 0" xyaxes="-1 0 0 0 1 0" fovy="80"/>
+                  <joint name="headrx" axis="1 0 0" range="-20 45" class="stiff_medium"/>
+                  <joint name="headry" axis="0 1 0" range="-30 30" class="stiff_medium"/>
+                  <joint name="headrz" axis="0 0 1" range="-30 30" class="stiff_medium"/>
+                  <geom name="head" size="0.085 0.025" pos="0 0.25 -.02" quat="1 .9 0 0"/>
+            </body>
+            <body name="lclavicle" pos="0 0.113945 0.00468037">
+            <!-- Seems to be no movement in the data here. Maybe remove? -->
+              <joint name="lclaviclery" axis="0 1 0" range="-20 10" class="stiff_high"/>
+              <joint name="lclaviclerz" axis="0 0 1" range="0 20" class="stiff_high"/>
+                <geom name="lclavicle" size="0.04 0.035" pos="0.08 0.05 -.01" quat="1 0 -1 0"/>
+              <!-- <geom name="lclavicle" size="0.08 0.04" pos="0.09 0.05 -.01" quat="1 0 -1 -.4"/> -->
+              <body name="lhumerus" pos="0.183 0.05 0.01" quat="0.18 0.68 -0.68 0.18">
+                <joint name="lhumerusrx" axis="1 0 0" range="-60 90" class="stiff_low"/>
+                <joint name="lhumerusry" axis="0 1 0" range="-90 90" class="stiff_low"/>
+                <joint name="lhumerusrz" axis="0 0 1" range="-90 90" class="stiff_low"/>
+                <geom name="lhumerus" size="0.035 0.124" pos="0 -0.138 0" quat="0.612 -0.612 0.35 0.35"/>
+                <body name="lradius" pos="0 -0.277 0">
+                  <joint name="lradiusrx" axis="1 0 0" range="-10 170" class="stiff_low"/>
+                  <geom name="lradius" size="0.03 0.1" pos="0 -0.13 0" quat="0.612 -0.612 0.35 0.35"/>
+                  <body name="lwrist" pos="0 -0.257 0" quat="-0.5 0 0.866 0">
+                    <geom name="lglove" type="sphere" size="0.07" pos="0 -0.05 0" quat="0 0 -1 -1" class="black_glove"/>
+                  </body>
+                </body>
+              </body>
+            </body>
+            <body name="rclavicle" pos="0 0.113945 0.00468037">
+            <!-- Seems to be no movement here in the data. Maybe remove? -->
+              <joint name="rclaviclery" axis="0 1 0" range="-10 20" class="stiff_high"/>
+              <joint name="rclaviclerz" axis="0 0 1" range="-20 0" class="stiff_high"/>
+              <!-- <geom name="rclavicle" size="0.08 0.04" pos="-.09 0.05 -.01" quat="1 0 -1 .4"/> -->
+              <geom name="rclavicle" size="0.04 0.035" pos="-.08 0.05 -.01" quat="1 0 -1 0"/>
+              <body name="rhumerus" pos="-0.183 0.05 0.01" quat="0.18 0.68 0.68 -0.18">
+                <joint name="rhumerusrx" axis="1 0 0" range="-60 90" class="stiff_low"/>
+                <joint name="rhumerusry" axis="0 1 0" range="-90 90" class="stiff_low"/>
+                <joint name="rhumerusrz" axis="0 0 1" range="-90 90" class="stiff_low"/>
+                <geom name="rhumerus" size="0.035 0.124" pos="0 -0.138 0" quat="0.61 -0.61 -0.35 -0.35"/>
+                <body name="rradius" pos="0 -0.277 0">
+                  <joint name="rradiusrx" axis="1 0 0" range="-10 170" class="stiff_low"/>
+                  <geom name="rradius" size="0.03 0.1" pos="0 -0.13 0" quat="0.612 -0.612 -0.35 -0.35"/>
+                  <body name="rwrist" pos="0 -0.257 0" quat="-0.5 0 -0.866 0">
+                    <geom name="rglove" type="sphere" size="0.07" pos="0 -0.05 0" quat="0 0 1 1" class="black_glove"/>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <contact>
+    <exclude body1="lclavicle" body2="rclavicle"/>
+    <exclude body1="head" body2="lclavicle"/>
+    <exclude body1="head" body2="rclavicle"/>
+  </contact>
+
+  <actuator>
+    <motor name="headrx" joint="headrx" gear="20"/>
+    <motor name="headry" joint="headry" gear="20"/>
+    <motor name="headrz" joint="headrz" gear="20"/>
+    <motor name="lclaviclery" joint="lclaviclery" gear="20"/>
+    <motor name="lclaviclerz" joint="lclaviclerz" gear="20"/>
+    <motor name="lfemurrx" joint="lfemurrx" gear="120"/>
+    <motor name="lfemurry" joint="lfemurry" gear="40"/>
+    <motor name="lfemurrz" joint="lfemurrz" gear="40"/>
+    <motor name="lfootrx" joint="lfootrx" gear="20"/>
+    <motor name="lfootrz" joint="lfootrz" gear="20"/>
+    <motor name="lhumerusrx" joint="lhumerusrx" gear="40"/>
+    <motor name="lhumerusry" joint="lhumerusry" gear="40"/>
+    <motor name="lhumerusrz" joint="lhumerusrz" gear="40"/>
+    <motor name="lowerbackrx" joint="lowerbackrx" gear="40"/>
+    <motor name="lowerbackry" joint="lowerbackry" gear="40"/>
+    <motor name="lowerbackrz" joint="lowerbackrz" gear="40"/>
+    <motor name="lradiusrx" joint="lradiusrx" gear="40"/>
+    <motor name="ltibiarx" joint="ltibiarx" gear="80"/>
+    <motor name="rclaviclery" joint="rclaviclery" gear="20"/>
+    <motor name="rclaviclerz" joint="rclaviclerz" gear="20"/>
+    <motor name="rfemurrx" joint="rfemurrx" gear="120"/>
+    <motor name="rfemurry" joint="rfemurry" gear="40"/>
+    <motor name="rfemurrz" joint="rfemurrz" gear="40"/>
+    <motor name="rfootrx" joint="rfootrx" gear="20"/>
+    <motor name="rfootrz" joint="rfootrz" gear="20"/>
+    <motor name="rhumerusrx" joint="rhumerusrx" gear="40"/>
+    <motor name="rhumerusry" joint="rhumerusry" gear="40"/>
+    <motor name="rhumerusrz" joint="rhumerusrz" gear="40"/>
+    <motor name="rradiusrx" joint="rradiusrx" gear="40"/>
+    <motor name="rtibiarx" joint="rtibiarx" gear="80"/>
+    <motor name="thoraxrx" joint="thoraxrx" gear="40"/>
+    <motor name="thoraxry" joint="thoraxry" gear="40"/>
+    <motor name="thoraxrz" joint="thoraxrz" gear="40"/>
+    <motor name="upperbackrx" joint="upperbackrx" gear="40"/>
+    <motor name="upperbackry" joint="upperbackry" gear="40"/>
+    <motor name="upperbackrz" joint="upperbackrz" gear="40"/>
+  </actuator>
+
+  <sensor>
+    <subtreelinvel name="thorax_subtreelinvel" body="thorax"/>
+    <velocimeter name="sensor_root_veloc" site="root"/>
+    <gyro name="sensor_root_gyro" site="root"/>
+    <accelerometer name="sensor_root_accel" site="root"/>
+    <touch name="sensor_touch_rfoot" site="rfoot_touch"/>
+    <touch name="sensor_touch_lfoot" site="lfoot_touch"/>
+  </sensor>
+</mujoco>
